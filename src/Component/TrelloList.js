@@ -3,7 +3,6 @@ import TrelloCard from './TrelloCard'
 import TrelloActionButton from '../Component/TrelloActionButton'
 
 const TrelloList = ({ title, cards, id }) => {
-  console.log('CARDS :',cards)
   return (
     <div style={styles.container}>
       <h4 style={styles.title}>{title}</h4>
@@ -20,7 +19,8 @@ const styles = {
     width: 300,
     padding: 8,
     marginRight: 8,
-    height: '100%'
+    height: '100%',
+    marginLeft: 10
   },
   title: {
     textAlign: 'center'

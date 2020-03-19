@@ -20,7 +20,6 @@ class TrelloActionButton extends Component {
     })
   }
   renderAddButton = () => {
-    console.log('PROPS :', this.props)
     const { list } = this.props;
     const buttonText = list ? 'Add another list' : 'Add another card';
     const buttonTextOpacity = list ? 1 : 0.5;
@@ -88,7 +87,7 @@ class TrelloActionButton extends Component {
               overflow: 'hidden'
             }}
           />
-        </Card>
+        </Card> 
         <div style={styles.formButtonGroup}>
           <Button
             onMouseDown={list ? this.handleAddList : this.handleAddCard}

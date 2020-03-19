@@ -8,7 +8,6 @@ export const addList = title => {
 };
 
 export const addCard = (id, text) => {
-  console.log('ID AND TEXT :', id, text)
   return {
     type: ADD_CARD,
     payload: {

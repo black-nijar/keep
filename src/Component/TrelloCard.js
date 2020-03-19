@@ -10,7 +10,7 @@ const TrelloCard = ({text}) => {
         </CardContent>
       </Card>
     </div>
-  )
+  ) 
 };
 
 const styles = {
