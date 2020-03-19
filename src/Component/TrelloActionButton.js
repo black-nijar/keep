@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Icon, Card, Button } from '@material-ui/core';
 import Textarea from 'react-textarea-autosize';
+import { connect } from 'react-redux';
+import { addList, addCard } from '../actions/actions';
 
 class TrelloActionButton extends Component {
   state = {
@@ -18,10 +20,11 @@ class TrelloActionButton extends Component {
     })
   }
   renderAddButton = () => {
+    console.log('PROPS :', this.props)
     const { list } = this.props;
     const buttonText = list ? 'Add another list' : 'Add another card';
     const buttonTextOpacity = list ? 1 : 0.5;
-    const buttonTextColor = list ? 'white' : 'inherit';
+    const buttonTextColor = list ? 'grey' : 'inherit';
     const buttonTextBackground = list ? 'rgpa(0,0,0,.15)' : 'inherit';
     return (
       <div
@@ -39,7 +42,25 @@ class TrelloActionButton extends Component {
     this.setState({
       text: e.target.value
     })
-  }
+  };
+  handleAddList = () => {
+    const { addList } = this.props;
+    const { text } = this.state;
+    if (text) {
+      this.setState({
+        text: ''
+      })
+      addList(text);
+    }
+  };
+  handleAddCard = () => {
+    const { addCard, id } = this.props;
+    const { text } = this.state;
+    if (text) {
+      this.setState({ text: '' })
+      addCard(id, text);
+    }
+  };
   renderForm = () => {
     const { list } = this.props;
     const placeholder = list ? 'Enter list title' : 'Enter a title for this card';
@@ -70,17 +91,18 @@ class TrelloActionButton extends Component {
         </Card>
         <div style={styles.formButtonGroup}>
           <Button
+            onMouseDown={list ? this.handleAddList : this.handleAddCard}
             varient='contained'
-            style={{color: 'white', backgroundColor: 'green'}}
+            style={{ color: 'white', backgroundColor: 'green' }}
           >
-            {buttonTitle} 
+            {buttonTitle} {' '}
           </Button>
-          <Icon style={{marginLeft: 2, cursor: 'pointer'}}>close</Icon>
+          <Icon style={{ marginLeft: 2, cursor: 'pointer' }}>close</Icon>
         </div>
       </div>
     )
   };
- 
+
   render() {
     return this.state.formOpen ? this.renderForm() : this.renderAddButton()
   };
@@ -102,4 +124,4 @@ const styles = {
     alignItems: 'center'
   }
 }
-export default TrelloActionButton
+export default connect(null, { addList, addCard })(TrelloActionButton)

@@ -8,8 +8,14 @@ const App = ({ lists }) => {
     <div>
       <h1>Welcome</h1>
       <div style={styles.listsContainer}>
-        {lists.map(list => <TrelloList title={list.title} key={list.id} cards={list.cards} />)}
-        <TrelloActionButton lists/>
+        {lists.map(list =>
+          <TrelloList
+            id={list.id}
+            key={list.id}
+            title={list.title}
+            cards={list.cards}
+          />)}
+        <TrelloActionButton list/>
       </div>
     </div>
   )
